@@ -1,0 +1,3 @@
+bases:
+- acme-gateway
+- istio-acme

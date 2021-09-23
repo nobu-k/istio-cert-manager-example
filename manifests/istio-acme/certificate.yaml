@@ -1,0 +1,15 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: acme-test-https-tls
+spec:
+  issuerRef:
+    name: letsencrypt
+  dnsNames:
+  - acme-test.example.com
+  secretName: acme-test-https-tls
+  secretTemplate:
+    annotations:
+      kubed.appscode.com/sync: ""
+  privateKey:
+    rotationPolicy: Always

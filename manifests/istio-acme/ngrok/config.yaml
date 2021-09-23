@@ -1,0 +1,12 @@
+tunnels:
+  http:
+    proto: http
+    addr: istio-ingressgateway.istio-system.svc:80
+    host_header: preserve
+    bind_tls: false
+    hostname: acme-test.example.com
+
+  https:
+    proto: tls
+    addr: istio-ingressgateway.istio-system.svc:443
+    hostname: acme-test.example.com

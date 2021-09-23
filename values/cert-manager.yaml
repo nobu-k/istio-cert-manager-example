@@ -1,0 +1,10 @@
+installCRDs: true
+
+startupapicheck:
+  podAnnotations:
+    # The job Pod will not stop if Istio sider is injected.
+    sidecar.istio.io/inject: "false"
+
+extraArgs:
+# Use Kubernetes Gateway API for ACME HTTP01 challenge
+- --feature-gates=ExperimentalGatewayAPISupport=true

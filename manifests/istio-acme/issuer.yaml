@@ -1,0 +1,19 @@
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: letsencrypt
+spec:
+  acme:
+    email: nobu.k.jp@gmail.com
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    # server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: letsencrypt
+    solvers:
+    - http01:
+        gatewayHTTPRoute:
+          labels:
+            app.kubernetes.io/name: http-route
+            app.kubernetes.io/component: network
+            app.kubernetes.io/instance: http-to-https-redirect
+            app.kubernetes.io/part-of: istio-acme

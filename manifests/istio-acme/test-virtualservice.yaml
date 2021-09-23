@@ -1,0 +1,15 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: test-virtualservice
+spec:
+  hosts:
+  - acme-test.example.com
+  gateways:
+  - test-gateway
+  http:
+  - route:
+    - destination:
+        host: nginx
+        port:
+          number: 8080

@@ -1,0 +1,32 @@
+# This needs to be in a separate subdirectory as the Gateway needs to be created
+# in the same namespace as istio-ingressgateway (maybe).
+
+apiVersion: networking.x-k8s.io/v1alpha1
+kind: GatewayClass
+metadata:
+  name: istio
+spec:
+  controller: istio.io/gateway-controller
+
+---
+apiVersion: networking.x-k8s.io/v1alpha1
+kind: Gateway
+metadata:
+  name: gateway
+  namespace: istio-system
+spec:
+  gatewayClassName: istio
+  listeners:
+  - hostname: acme-test.example.com
+    port: 80
+    protocol: HTTP
+    routes:
+      namespaces:
+        from: All
+      selector:
+        matchLabels:
+          app.kubernetes.io/name: http-route
+          app.kubernetes.io/component: network
+          app.kubernetes.io/instance: http-to-https-redirect
+          app.kubernetes.io/part-of: istio-acme
+      kind: HTTPRoute

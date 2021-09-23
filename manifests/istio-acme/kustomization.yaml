@@ -1,0 +1,18 @@
+namespace: default
+resources:
+- nginx.yaml
+- test-gateway.yaml
+- test-virtualservice.yaml
+- ngrok.yaml
+- http-redirect.yaml
+- issuer.yaml
+- certificate.yaml
+configMapGenerator:
+- name: ngrok-config
+  behavior: merge
+  files:
+  - ngrok/config.yaml
+- name: http-to-https-redirect-conf
+  behavior: merge
+  files:
+  - nginx.conf=nginx/http-to-https.conf
